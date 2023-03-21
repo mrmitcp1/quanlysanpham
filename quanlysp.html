@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Add New Product</h1>
+<div style="background-color: lightgray; padding: 20px 40px 20px 40px; width: 30%">
+<input id="input" type="text" placeholder="New Product" size="50" style="height: 40px;">
+<button style="height: 45px; width: 70px; background-color: green; border-radius: 10px" onclick="addCar()">Add</button>
+
+</div>
+<h2>Display All Product</h2>
+
+<table>
+    <tr>
+        <td><p id="display"></p></td>
+
+    </tr>
+</table>
+<p id="text" style="width: 100%; "   ></p>
+<script>
+    let car = []
+    function displayCar(index) {
+        // let output = '';
+        let tab = '<table>'
+        tab+= `<tr>
+        <td style="width:200px"><b>Product Name</b></td>
+
+        <td style="text-align:center" colspan="2"><b>${car.length} products</b></td>
+    </tr>`
+         for (let i = 0; i < car.length; i++) {
+           if (i%2===0) {
+               tab += `
+<tr>
+<td style="width: 400px; background-color: lightgray; text-align: center" >${car[i]}</td>
+<td><button style="background: green; width: 60px;height: 30px; border-radius: 10px" id="edit" onclick="editCar(${i})">Edit</button></td>
+<td><button style="background: green; width: 60px;height: 30px; border-radius: 10px" onclick="deleteCar(${i})">Delete</button></td>
+</tr>
+             `
+           }else {
+               tab += `
+<tr>
+<td style="width: 400px;text-align: center " >${car[i]}</td>
+<td><button style="background: green; width: 60px;height: 30px; border-radius: 10px" id="edit" onclick="editCar(${i})">Edit</button></td>
+<td><button style="background: green; width: 60px;height: 30px; border-radius: 10px" onclick="deleteCar(${i})">Delete</button></td>
+</tr>
+             `
+           }
+           } tab+=`</table>`
+         document.getElementById('text').innerHTML=tab
+    }
+    function addCar() {
+        let newCar= document.getElementById('input').value;
+        car.push(newCar);
+        document.getElementById('input').value='';
+
+        displayCar()
+    }
+    function editCar(index) {
+        let changeCar = prompt('input car')
+
+        car[index]=changeCar
+
+displayCar(index)
+    }
+    function deleteCar(index) {
+
+        car.splice(index,1)
+
+        displayCar(index)
+    }
+</script>
+</body>
+</html>
